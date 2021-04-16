@@ -6,6 +6,8 @@ def aplicacion1(request):
     return render(request, 'aplicacion1/index.html')
 
 def saludar(request, nombre):
-    return HttpResponse(f"Hola {nombre}")
+    #return HttpResponse(f"Hola {nombre}")
+    context = {'nombre':nombre}
+    return render(request, 'aplicacion1/saludar.html', context)
 
     
