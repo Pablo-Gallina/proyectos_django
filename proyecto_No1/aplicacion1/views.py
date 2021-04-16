@@ -10,4 +10,7 @@ def saludar(request, nombre):
     context = {'nombre':nombre}
     return render(request, 'aplicacion1/saludar.html', context)
 
-    
+def moneda(request):
+    num=0
+    context = {'num':num}
+    return render(request, 'aplicacion1/moneda.html', context)
