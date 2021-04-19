@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import AgregarTarea
 
-tareas = ['Limpiar', 'Investigar', 'Estudiar']
+tareas = []
 # Create your views here.
 def home(request):
     context = {'tareas': tareas}
@@ -12,6 +12,7 @@ def add(request):
         if form.is_valid():
             tarea = form.cleaned_data['tarea']
             tareas.append(tarea)
+            return redirect('home')
     else:
         form = AgregarTarea()
     context = {'form': form}
