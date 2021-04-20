@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-#from django.urls import reverse_lazy
+from django.urls import reverse_lazy
 #from django.core import serializers
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .forms import MascotaForm
@@ -48,25 +48,24 @@ def mascota_delete(request, id_mascota):
         mascota.delete()
         return redirect("listar")
     return render(request, 'mascota/mascota_delete.html', {'mascota':mascota})
-"""
+
 class MascotaList(ListView):
     model = Mascota
-    template_name = 'mascota/mascota_list.html'
+    template_name = 'mascota/mascota_listar.html'
 
 class MascotaCreate(CreateView):
     model = Mascota
     form_class = MascotaForm
     template_name = 'mascota/mascota_form.html'
-    success_url = reverse_lazy('mascotaVer')
+    success_url = reverse_lazy('listar')
 
 class MascotaUpdate(UpdateView):
     model = Mascota
     form_class = MascotaForm
     template_name = 'mascota/mascota_form.html'
-    success_url = reverse_lazy('mascotaVer')
+    success_url = reverse_lazy('listar')
 
 class MascotaDelete(DeleteView):
     model = Mascota
     template_name = 'mascota/mascota_delete.html'
-    success_url = reverse_lazy('mascotaVer')
-"""
+    success_url = reverse_lazy('listar')

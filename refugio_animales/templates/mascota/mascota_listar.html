@@ -12,7 +12,7 @@
   <div class="container">
     <center><h1>LISTA DE MASCOTAS</h1></center><br>
     <div class="table table-hover">
-    {% if mascota %}
+    {% if object_list %}
       <table id="example" style="width:100%">
         <thead>
             <tr>
@@ -27,7 +27,7 @@
         </thead>
         <tbody>
           
-          {% for mascotas in mascota %}
+          {% for mascotas in object_list %}
             <tr>
               <th scope="col">{{mascotas.id}} </th>
               <td>{{mascotas.nombre}}</td>
