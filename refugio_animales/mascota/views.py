@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-"""from django.urls import reverse_lazy
-from django.core import serializers
+#from django.urls import reverse_lazy
+#from django.core import serializers
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-"""
 from .forms import MascotaForm
 from .models import Mascota
 # Create your views here.
