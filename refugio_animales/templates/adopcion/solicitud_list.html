@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+
+{% block staticextra %}
+  <link rel="stylesheet" type="text/css" href=" {% static 'datatables/datatables.min.css' %} "/>
+  <!--datables estilo bootstrap 4 CSS-->
+  <link rel="stylesheet" type="text/css" href=" {% static 'datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css' %} ">
+{% endblock staticextra %}
+
+<br>
+<div class="container">
+    <center><h1>LISTA DE SOLICITUDES</h1></center><br>
+    {% if object_list %}
+    <div class="table table-hover">
+      <table id="example" style="width:100%">
+        <thead>
+            <tr>
+				<th scope="col">No. Solicitud</th>
+				<th scope="col">Adoptante</th>
+				<th scope="col">No. Mascotas</th>
+				<th scope="col">Razones</th>
+				<th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+          
+          {% for solicitud in object_list %}
+            <tr>
+            	<th scope="col"> {{ solicitud.id }} </th>
+            	<td>{{ solicitud.persona.nombre }} {{solicitud.persona.apellidos}}</td>
+            	<td>{{ solicitud.numero_mascotas }}</td>
+            	<td>{{ solicitud.razones }}</td>
+        		<td>
+				<a class="btn btn-warning" href=" {% url 'editarSolicitud' solicitud.id %} ">Editar</a>
+				<a class="btn btn-danger" href=" {% url 'eliminarSolicitud' solicitud.id %} ">Eliminar</a>
+			</td>
+            </tr>
+          {% endfor %}
+          {% else %}
+            <h2>No hay registros</h2>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+{% block extrajs %}
+  <script type="text/javascript" src=" {% static 'datatables/datatables.min.js' %} "></script>
+{% endblock extrajs %}
+
+{% endblock%}
