@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block staticextra %}
+  <link rel="stylesheet" type="text/css" href=" {% static 'datatables/datatables.min.css' %} "/>
+  <!--datables estilo bootstrap 4 CSS-->
+  <link rel="stylesheet" type="text/css" href=" {% static 'datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css' %} ">
+{% endblock staticextra %}
+
+{% block header %}
+  <br>
+  <div class="container">
+    <center><h1>LISTA DE MASCOTAS</h1></center><br>
+    <div class="table table-hover">
+    {% if mascota %}
+      <table id="example" style="width:100%">
+        <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Genero</th>
+              <th scope="col">Edad</th>
+              <th scope="col">Fecha de rescate</th>
+              <th scope="col">Aoptante</th>
+              <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+          
+          {% for mascotas in mascota %}
+            <tr>
+              <th scope="col">{{mascotas.id}} </th>
+              <td>{{mascotas.nombre}}</td>
+              <td>{{mascotas.genero}}</td>
+              <td>{{mascotas.edad_aproximada}}</td>
+              <td>{{mascotas.fecha_rescate}}</td>
+              <td>{{mascotas.persona.nombre}} {{mascotas.persona.apellido}}</td>
+              <!--  -->
+              <td><a href=" {% url 'editar' mascotas.id %} " class="btn btn-warning">EDITAR</a>  <a href="{% url 'eliminar' mascotas.id %}" class="btn btn-danger">ELIMINAR</a></td>
+            </tr>
+          {% endfor %}
+          {% else %}
+            <h2>No hay registros</h2>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% block extrajs %}
+  <script type="text/javascript" src=" {% static 'datatables/datatables.min.js' %} "></script>
+  <script type="text/javascript" src=" {% static 'js/main.js' %} "></script>
+{% endblock extrajs %}
+
+{% endblock header %}

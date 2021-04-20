@@ -4,17 +4,17 @@ from django.http import HttpResponse
 from django.core import serializers
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 """
-#from .forms import MascotaForm
-#from .models import Mascota
+from .forms import MascotaForm
+from .models import Mascota
 # Create your views here.
 
 
 def home(request):
-    return HttpResponse("Index de Mascota")
+    return render(request, 'mascota/index.html')
 """def listado(request):
     lista = serializers.serialize('json', Mascota.objects.all())
     return HttpResponse(lista, content_type='application/json')
-
+"""
 def mascota_view(request):
     if request.method == "POST":
         form = MascotaForm(request.POST)
@@ -26,10 +26,11 @@ def mascota_view(request):
 
     return render(request, 'mascota/mascota_form.html', {'form': form})
 
-def mascota_list(request):
+def mascota_listar(request):
     mascota = Mascota.objects.all().order_by('id')
     context = {'mascota': mascota}
-    return render(request, 'mascota/mascota_list.html', context)
+    return render(request, 'mascota/mascota_listar.html', context)
+
 
 def mascota_edit(request, id_mascota):
     mascota = Mascota.objects.get(id=id_mascota)
@@ -39,16 +40,16 @@ def mascota_edit(request, id_mascota):
         form = MascotaForm(request.POST, instance=mascota)
         if form.is_valid():
             form.save()
-        return redirect("mascotaVer")
+        return redirect("/listar")
     return render(request, "mascota/mascota_form.html", {'form':form})
 
 def mascota_delete(request, id_mascota):
     mascota = Mascota.objects.get(id=id_mascota)
     if request.method == "POST":
         mascota.delete()
-        return redirect("mascotaVer")
+        return redirect("listar")
     return render(request, 'mascota/mascota_delete.html', {'mascota':mascota})
-
+"""
 class MascotaList(ListView):
     model = Mascota
     template_name = 'mascota/mascota_list.html'
