@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse_lazy
-#from django.core import serializers
+from django.core import serializers
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .forms import MascotaForm
 from .models import Mascota
@@ -10,10 +10,11 @@ from .models import Mascota
 
 def home(request):
     return render(request, 'mascota/index.html')
-"""def listado(request):
+
+def listado(request):
     lista = serializers.serialize('json', Mascota.objects.all())
     return HttpResponse(lista, content_type='application/json')
-"""
+
 def mascota_view(request):
     if request.method == "POST":
         form = MascotaForm(request.POST)
@@ -52,6 +53,7 @@ def mascota_delete(request, id_mascota):
 class MascotaList(ListView):
     model = Mascota
     template_name = 'mascota/mascota_listar.html'
+    paginate_by = 8
 
 class MascotaCreate(CreateView):
     model = Mascota
